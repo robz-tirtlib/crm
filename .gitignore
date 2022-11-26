@@ -1,0 +1,4 @@
+__pycache__
+secret_keys.py
+images
+db.sqlite3

@@ -1,0 +1,12 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+
+    <p>Are you sure you want to delete "{{order}}" order?</p>
+    <input type="hidden" name="next" value="{{ next }}"/>
+    <input class="btn btn-danger btn-sm" type="submit" value="Submit">
+    <a class="btn btn-primary btn-sm" role="button" href="{{ next }}">Cancel</a>
+</form>
+{% endblock %}

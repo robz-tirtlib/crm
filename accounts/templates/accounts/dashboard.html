@@ -1,0 +1,58 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+
+<br>
+
+<div class="row" style="padding: 0px 10px">
+    <div class="col-md-5">
+        <h5>CUSTOMERS:</h5>
+        <div class="card card-body text-center">
+            <table class="table table-sm">
+				<tr>
+                    <th></th>
+					<th>Customer</th>
+					<th>Orders</th>
+				</tr>
+                {% for customer in customers %}
+                    <tr>
+                        <td><a class="btn btn-outline-primary btn-sm" href="{% url 'customer' customer.pk %}" role="button">View</a></td>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.order_set.count}}</td>
+                    </tr>
+                {% empty %}
+                    <p>No customers currently.</p>
+                {% endfor %}
+			</table>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <h5>LAST 5 ORDERS:</h5>
+        <div class="card card-body text-center">
+            <table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date ordered</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+				</tr>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{order.product.name}}</td>
+                        <td>{{order.date_created}}</td>
+                        <td>{{order.status}}</td>
+                        <td><a class="btn btn-outline-primary btn-sm" href="{% url 'update-order' order.pk %}" role="button">Update</a></td>
+                        <td><a class="btn btn-outline-danger btn-sm" href="{% url 'delete-order' order.pk %}" role="button">Remove</a></td>
+                    </tr>
+                {% empty %}
+                    <p>No orders currently.</p>
+                {% endfor %}
+			</table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

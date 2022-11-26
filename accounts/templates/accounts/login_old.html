@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<div class="card-wrapper">
+    <div class="login-card">
+        <form method="POST">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Submit">
+            <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+{% endblock %}
